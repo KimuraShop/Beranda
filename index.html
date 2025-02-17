@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimura</title>
+    <link rel="icon" href="image/islam.png">
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 165px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .r-navbar {
+        width: 95%;
+        position: fixed;
+        top: 10px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #4E9F3D;
+        border-radius: 10px;
+        padding-left: 10px;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .r-nav-logo {
+        margin: 10px;
+        color: rgb(255, 255, 255);
+    }
+
+    .r-nav-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .r-nav-menu button {
+        color: rgb(255, 255, 255);
+        font-size: 18px;
+        transition: all 0.5s ease;
+    }
+
+    .offcanvas-body ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .offcanvas-body a {
+        text-decoration: none;
+        height: 50px;
+        color: white;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid;
+        transition: all 0.5s ease;
+    }
+
+    .offcanvas-body a:hover {
+        margin-right: 10px;
+        color: #1E5128;
+    }
+
+    /* peraturan */
+    .alert {
+        margin-top: 95px;
+        width: 95%;
+        text-align: center;
+    }
+
+    .r-container {
+        width: 90%;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+    }
+
+    /* footer */
+    .menu-category {
+        width: 90%;
+        margin: 50px 20px 20px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-category:first-child {
+        margin: 20px;
+    }
+
+    .cat-title {
+        font-size: 22px;
+    }
+
+    .cat-info {
+        font-size: 12px;
+        display: flex;
+        align-items: end;
+    }
+
+    .r-card {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        border-bottom: 1px solid;
+        background: white;
+        transition: all 0.5s ease;
+    }
+
+    .r-card,
+    .menu-category {
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 25%;
+    }
+
+    .r-card:last-child {
+        margin-bottom: 80px;
+    }
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            scale: 0.5;
+            transform: translateX(-800px);
+        }
+
+        to {
+            opacity: 1;
+            scale: 1;
+            transform: translateX(0px);
+        }
+    }
+
+    .image-menu {
+        overflow: hidden;
+        min-width: none;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        border-radius: 20px;
+    }
+
+    .image-menu img {
+        width: 100%;
+    }
+
+    .info-menu {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .menu-title {
+        font-size: 20px;
+    }
+
+    .deskripsi-menu {
+        font-size: 12px;
+    }
+
+    .price-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-success {
+        width: 130px;
+    }
+
+    .jumlah {
+        background: rgb(163, 163, 163);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+    }
+
+    .r-footer {
+        position: fixed;
+        z-index: 10;
+        bottom: -200px;
+        border: 1px solid;
+        border-radius: 10px;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        transition: all 0.5s ease;
+    }
+
+    .footer-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .footer-detail {
+        overflow: auto;
+        max-height: 45px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .pesan {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <!-- navbar -->
+    <div class="r-navbar">
+        <div class="r-nav-logo">
+            <h2>KIMURA</h2>
+        </div>
+        <div class="r-nav-menu">
+            <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight">
+                <i class="bi bi-person-gear" style="font-size: 22px;"></i>
+            </button>
+        </div>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Customer Service</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-whatsapp"></i>
+                            Whatsapp
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-instagram"></i>
+                            Instagram
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- navbar -->
+
+    <!-- peraturan -->
+    <div class="alert alert-info" role="alert">
+        Sebelum Memesan Perhatikan Beberapa Hal Berikut. <a type="button" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop" style="color: rgb(78, 78, 78);"><b>Click Me</b></a>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Peraturan Pemesanan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul style="list-style: decimal;">
+                        <li>
+                            Hanya disekitar Area Kampus
+                        </li>
+                        <li>
+                            Pengantaran dari pukul 08.00 - 17.00
+                        </li>
+                        <li>
+                            Pembayaran di lakukan COD
+                        </li>
+                        <li>
+                            Penulisan Alamat ("Gedung, Ruang"), Contoh (M. Yasin, 333)
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- peraturan -->
+    <!-- content -->
+    <div class="r-container">
+        <div class="menu-category">
+            <div class="cat-title">Always Ready</div>
+            <div class="cat-info">Senin - Sabtu</div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/sus.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Sus Kering</b>
+                </div>
+                <div class="deskripsi-menu">
+                    Isi Coklat
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/Makaroni.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Makaroni Pedas</b>
+                </div>
+                <div class="deskripsi-menu">
+                    Extra daun jeruk
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/basreng-pedas.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Basreng Pedas</b>
+                </div>
+                <div class="deskripsi-menu">
+
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/basreng-ori.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Basreng Original</b>
+                </div>
+                <div class="deskripsi-menu">
+
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/jagung.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Kripik jagung</b>
+                </div>
+                <div class="deskripsi-menu">
+
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="r-card">
+            <div class="image-menu">
+                <img src="image/Astor.jpg" alt="onde-onde">
+            </div>
+            <div class="info-menu">
+                <div class="menu-title">
+                    <b>Astor</b>
+                </div>
+                <div class="deskripsi-menu">
+                    Rasa Coklat
+                </div>
+                <div class="price-menu">
+                    5.000
+                    <button class="btn btn-success buy-btn">Buy</button>
+                    <div class="menu-action" style="display: none;">
+                        <button class="btn btn-danger decrease-btn">-</button>
+                        <div class="jumlah"><b>0</b></div>
+                        <button class="btn btn-primary increase-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="r-footer bg-light">
+        <div class="footer-title">
+            <h4>Total</h4>
+            <div class="pesan">
+                <h4 id="total-price">Rp 0</h4>
+                <button class="btn btn-primary" id="pesan-btn">
+                    Pesan
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-detail">
+            <div id="footer-menu"></div>
+        </div>
+        <div style="display: flex;justify-content: center;margin-bottom: 10px;">
+            <input type="text" name="alamat" id="alamat" class="form-control" style="border: 1px solid; width: 98%;"
+                placeholder="Ruangan">
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            myModal.show();
+        };
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let menuAction = this.nextElementSibling;
+                menuAction.style.display = 'flex';
+                this.style.display = 'none';
+
+                let jumlahElement = menuAction.querySelector('.jumlah b');
+                let jumlah = parseInt(jumlahElement.innerText);
+                jumlahElement.innerText = jumlah + 1;
+
+                updateFooter(this.closest('.r-card'), jumlahElement.innerText);
+            });
+        });
+
+        document.querySelectorAll('.increase-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let jumlahElement = this.previousElementSibling.querySelector('b');
+                let jumlah = parseInt(jumlahElement.innerText);
+                jumlahElement.innerText = jumlah + 1;
+
+                updateFooter(this.closest('.r-card'), jumlahElement.innerText);
+                toggleMenuAction(this.closest('.menu-action'), jumlahElement);
+            });
+        });
+
+        document.querySelectorAll('.decrease-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let jumlahElement = this.nextElementSibling.querySelector('b');
+                let jumlah = parseInt(jumlahElement.innerText);
+                if (jumlah > 0) {
+                    jumlahElement.innerText = jumlah - 1;
+
+                    updateFooter(this.closest('.r-card'), jumlahElement.innerText);
+                    toggleMenuAction(this.closest('.menu-action'), jumlahElement);
+                }
+            });
+        });
+
+        function toggleMenuAction(menuAction, jumlahElement) {
+            let buyButton = menuAction.previousElementSibling;
+            if (parseInt(jumlahElement.innerText) === 0) {
+                menuAction.style.display = 'none';
+                buyButton.style.display = 'inline-block';
+            } else {
+                menuAction.style.display = 'flex';
+                buyButton.style.display = 'none';
+            }
+        }
+
+        function updateFooter(card, jumlah) {
+            let title = card.querySelector('.menu-title b').innerText;
+            let price = card.querySelector('.price-menu').firstChild.textContent.trim();
+            let footerMenu = document.getElementById('footer-menu');
+
+            let existingItem = footerMenu.querySelector(`[data-title="${title}"]`);
+
+            if (existingItem) {
+                if (jumlah == 0) {
+                    existingItem.remove();
+                } else {
+                    existingItem.innerText = `${title} x${jumlah} = ${jumlah * parseInt(price.replace('.', ''))}`;
+                }
+            } else {
+                if (jumlah > 0) {
+                    let newItem = document.createElement('div');
+                    newItem.setAttribute('data-title', title);
+                    newItem.innerText = `${title} x${jumlah} = ${jumlah * parseInt(price.replace('.', ''))}`;
+                    footerMenu.appendChild(newItem);
+                }
+            }
+
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            let total = 0;
+            document.querySelectorAll('#footer-menu div').forEach(item => {
+                let parts = item.innerText.split(' = ');
+                total += parseInt(parts[1].replace('.', ''));
+            });
+
+            document.getElementById('total-price').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+
+            // Toggle footer visibility
+            let footer = document.querySelector('.r-footer');
+            if (total === 0) {
+                footer.style.bottom = '-200px';
+            } else {
+                footer.style.bottom = '10px';
+            }
+        }
+
+        document.getElementById('pesan-btn').addEventListener('click', function () {
+            let alamat = document.getElementById('alamat').value;
+            let total = parseInt(document.getElementById('total-price').innerText.replace('Rp ', '').replace(
+                '.', ''));
+
+            if (alamat.trim() === '' || total === 0) {
+                alert('Tolong Buat Pesanan dengan Sungguh-Sungguh');
+                return;
+            }
+
+            let menuItems = [];
+            document.querySelectorAll('#footer-menu div').forEach(item => {
+                menuItems.push(item.innerText.split(' = ')[0]);
+            });
+
+            let whatsappMessage = `Menu\n- ${menuItems.join('\n- ')}\nAlamat = ${alamat}`;
+            let whatsappUrl = `https://wa.me/62881024834415?text=${encodeURIComponent(whatsappMessage)}`;
+
+            window.open(whatsappUrl, '_blank');
+
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
