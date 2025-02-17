@@ -192,6 +192,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 10px;
     }
 
     .menu-action {
@@ -516,10 +517,10 @@
                     <b>Siwak</b>
                 </div>
                 <div class="deskripsi-menu">
-                    
+
                 </div>
                 <div class="price-menu">
-                    5.000
+                    7.000
                     <button class="btn btn-success buy-btn">Buy</button>
                     <div class="menu-action" style="display: none;">
                         <button class="btn btn-danger decrease-btn">-</button>
@@ -546,17 +547,19 @@
         <div class="footer-detail">
             <div id="footer-menu"></div>
         </div>
-        <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-bottom: 10px; gap: 10px;">
-            <input type="text" name="customer" id="customer" class="form-control" style="border: 1px solid; width: 95%;" placeholder="Nama Pemesan">
+        <div
+            style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-bottom: 10px; gap: 10px;">
+            <input type="text" name="customer" id="customer" class="form-control" style="border: 1px solid; width: 95%;"
+                placeholder="Nama Pemesan">
             <input type="text" name="alamat" id="alamat" class="form-control" style="border: 1px solid; width: 95%;"
                 placeholder="Ruangan">
         </div>
     </div>
     <script>
-        window.onload = function () {
-            var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            myModal.show();
-        };
+        // window.onload = function () {
+        //     var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        //     myModal.show();
+        // };
         document.querySelectorAll('.buy-btn').forEach(button => {
             button.addEventListener('click', function () {
                 let menuAction = this.nextElementSibling;
@@ -650,11 +653,12 @@
         }
 
         document.getElementById('pesan-btn').addEventListener('click', function () {
+            let customer = document.getElementById('customer').value;
             let alamat = document.getElementById('alamat').value;
             let total = parseInt(document.getElementById('total-price').innerText.replace('Rp ', '').replace(
-                '.', ''));
+                /\./g, ''));
 
-            if (alamat.trim() === '' || total === 0) {
+            if (customer.trim() === '' || alamat.trim() === '' || total === 0) {
                 alert('Tolong Buat Pesanan dengan Sungguh-Sungguh');
                 return;
             }
@@ -664,7 +668,8 @@
                 menuItems.push(item.innerText.split(' = ')[0]);
             });
 
-            let whatsappMessage = `Menu\n- ${menuItems.join('\n- ')}\nAlamat = ${alamat}`;
+            let whatsappMessage =
+                `Menu\n- ${menuItems.join('\n- ')}\nNama Pemesan: ${customer}\nAlamat: ${alamat}`;
             let whatsappUrl = `https://wa.me/62881024834415?text=${encodeURIComponent(whatsappMessage)}`;
 
             window.open(whatsappUrl, '_blank');
